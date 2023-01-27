@@ -22,8 +22,8 @@ jobs:
           cp target/a11y.jar a11y-reports/a11y.jar
       - name: Zip the files
         uses: montudor/action-zip@v1
-          with:
-            args: zip -qq -r a11y-reports.zip a11y-reports
+        with:
+          args: zip -qq -r a11y-reports.zip a11y-reports
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
