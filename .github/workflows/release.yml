@@ -18,7 +18,8 @@ jobs:
         run: mkdir a11y-reports
       - name: Copy files
         run: |
-          cp -r src/main/resources/bin/ a11y-reports/
+          cp -r src/main/resources/bin/a11y-report a11y-reports/a11y-report
+          cp -r src/main/resources/bin/a11y-report.bat a11y-reports/a11y-report.bat
           cp target/a11y.jar a11y-reports/a11y.jar
       - name: Zip the files
         uses: montudor/action-zip@v1
