@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check if Java is installed
+if type -p java; then
+    _java=java
+elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
+    _java="$JAVA_HOME/bin/java"
+else
+    echo "Java is not installed. Exiting the script."
+    echo "Java version greater or equal to 1.8 is required and JAVA_HOME path to set in environment variables"
+    exit 1
+fi
+
+if [[ "$_java" ]]; then
+    version=$("$_java" -version 2>&1 | awk -F '"' '/version/ {print $2}')
+    if [[ "$version" < "1.8" ]]; then
+        echo "Java version is less than 8"
+        echo "Java version should be greater or equal to 8"
+        exit 1
+    fi
+fi
+
+JAR_DIR=$( cd "${0%/*}" && pwd -P )
+#https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script
+
+java -cp "$JAR_DIR/*" io.github.sridharbandi.HtmlReporter "$@"

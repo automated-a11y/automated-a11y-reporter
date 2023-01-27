@@ -1,0 +1,1 @@
+<h1 class="header"><i class="fas fa-universal-access"></i> ${title?truncate(50, '...')}</h1>
