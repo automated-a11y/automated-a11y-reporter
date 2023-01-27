@@ -1,0 +1,33 @@
+name: Publish and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build
+        run: mvn clean package -DskipTests
+      - name: Create directory
+        run: mkdir a11y-reports
+      - name: Copy files
+        run: |
+          cp -r src/main/resources/bin/ a11y-reports/
+          cp target/a11y.jar a11y-reports/a11y.jar
+      - name: Zip the files
+        uses: montudor/action-zip@v1
+          with:
+            args: zip -qq -r a11y-reports.zip a11y-reports
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          files: |
+            "target/*.jar"
+            a11y-reports.zip
