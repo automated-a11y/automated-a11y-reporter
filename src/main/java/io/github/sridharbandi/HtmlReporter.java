@@ -26,7 +26,9 @@ import static java.nio.file.Files.createDirectories;
 import static java.nio.file.Files.walk;
 import static java.nio.file.Paths.get;
 
-@CommandLine.Command(name = "Automated a11y HTML Reporter", mixinStandardHelpOptions = true, version = "v1.0.1", description = "Generates Accessibility HTML reports out from JSON created by the Organisation https://github.com/automated-a11y")
+@CommandLine.Command(name = "Automated a11y HTML Reporter", mixinStandardHelpOptions = true,
+        version = "A11y Reports v1.0.1",
+        description = "Generates Accessibility HTML reports out from JSON created by the Organisation https://github.com/automated-a11y")
 public class HtmlReporter implements Runnable {
     private static final Logger LOG = LoggerFactory.getLogger(HtmlReporter.class);
 
